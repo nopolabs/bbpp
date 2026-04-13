@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Big Beautiful Peace Prize</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1a4a7a;
+      --dark:   #0d2844;
+      --body:   #2d4a6a;
+      --gold:   #c9a227;
+      --gold-light: #e8c84a;
+      --cream:  #faf7f0;
+      --cream2: #f2ede0;
+      --white:  #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--cream);
+      color: var(--body);
+      min-height: 100vh;
+    }
+
+    /* ── Hero ── */
+
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem 4rem;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,162,39,.12) 0%, transparent 70%),
+        var(--cream);
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .seal-ring {
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      box-shadow:
+        0 0 0 8px var(--cream),
+        0 0 0 10px rgba(201,162,39,.35),
+        0 12px 48px rgba(13,40,68,.18);
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+      flex-shrink: 0;
+    }
+
+    .seal-ring img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.1;
+      letter-spacing: .02em;
+      max-width: 16ch;
+    }
+
+    .hero p {
+      margin-top: 1.1rem;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 300;
+      color: var(--body);
+      letter-spacing: .04em;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      margin-top: 2.4rem;
+      padding: .85rem 2.6rem;
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, box-shadow .2s;
+      box-shadow: 0 4px 18px rgba(13,40,68,.22);
+    }
+
+    .cta-btn:hover { background: var(--dark); box-shadow: 0 6px 24px rgba(13,40,68,.32); }
+
+    /* ── Form section ── */
+
+    .form-section {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 6rem;
+    }
+
+    .section-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 600;
+      color: var(--dark);
+      text-align: center;
+      margin-bottom: .6rem;
+    }
+
+    .section-sub {
+      text-align: center;
+      font-size: .95rem;
+      color: var(--body);
+      opacity: .75;
+      margin-bottom: 2.8rem;
+      letter-spacing: .03em;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: .8rem auto 2.8rem;
+    }
+
+    .field {
+      margin-bottom: 1.6rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: .45rem;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: .75rem 1rem;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem;
+      color: var(--dark);
+      background: var(--white);
+      border: 1.5px solid rgba(26,74,122,.25);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      appearance: none;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(26,74,122,.12);
+    }
+
+    .field textarea { resize: vertical; min-height: 80px; }
+
+    .field .hint {
+      margin-top: .35rem;
+      font-size: .8rem;
+      color: var(--body);
+      opacity: .65;
+    }
+
+    .field-error {
+      margin-top: .35rem;
+      font-size: .82rem;
+      color: #b33;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      flex: 1;
+      min-width: 140px;
+      padding: .8rem 1.4rem;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: .9rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, box-shadow .2s, opacity .2s;
+    }
+
+    .btn:disabled { opacity: .5; cursor: default; }
+
+    .btn-preview {
+      background: transparent;
+      color: var(--navy);
+      border: 1.5px solid var(--navy);
+    }
+
+    .btn-preview:hover:not(:disabled) { background: rgba(26,74,122,.07); }
+
+    .btn-award {
+      background: var(--navy);
+      color: var(--cream);
+      box-shadow: 0 4px 16px rgba(13,40,68,.2);
+    }
+
+    .btn-award:hover:not(:disabled) { background: var(--dark); }
+
+    /* ── Preview area ── */
+
+    .preview-area {
+      margin-top: 2.4rem;
+      text-align: center;
+    }
+
+    .preview-area .preview-label {
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .9rem;
+    }
+
+    .preview-area img {
+      max-width: 100%;
+      border: 1px solid rgba(26,74,122,.18);
+      box-shadow: 0 6px 32px rgba(13,40,68,.14);
+    }
+
+    .preview-spinner,
+    .preview-error {
+      padding: 2rem;
+      font-size: .9rem;
+      color: var(--body);
+      opacity: .7;
+    }
+
+    .preview-error { color: #a33; opacity: 1; }
+
+    /* ── Confirmation ── */
+
+    .confirmation {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      background: rgba(201,162,39,.08);
+      border: 1.5px solid rgba(201,162,39,.4);
+    }
+
+    .confirmation .trophy {
+      font-size: 2.8rem;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .confirmation h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: .6rem;
+    }
+
+    .confirmation p {
+      font-size: 1rem;
+      color: var(--body);
+      line-height: 1.6;
+    }
+
+    .confirmation .reset-btn {
+      margin-top: 1.8rem;
+      display: inline-block;
+      padding: .65rem 2rem;
+      background: transparent;
+      color: var(--navy);
+      border: 1.5px solid var(--navy);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .confirmation .reset-btn:hover { background: rgba(26,74,122,.07); }
+
+    /* ── Footer ── */
+
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      border-top: 1px solid rgba(26,74,122,.12);
+      font-size: .78rem;
+      color: var(--body);
+      opacity: .55;
+      letter-spacing: .05em;
+    }
+
+    /* ── Responsive ── */
+
+    @media (max-width: 480px) {
+      .seal-ring { width: 260px; height: 260px; }
+      .form-actions { flex-direction: column; }
+      .btn { flex: none; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="seal-ring">
+      <img src="/assets/bbpp-seal.png" alt="Big Beautiful Peace Prize Seal">
+    </div>
+    <h1>The Big Beautiful Peace Prize</h1>
+    <p>Award it to anyone.&nbsp; They deserve it.</p>
+    <a href="#award" class="cta-btn">Award the Prize</a>
+  </section>
+
+  <!-- Award Form -->
+  <section class="form-section" id="award">
+    <h2 class="section-label">Present the Prize</h2>
+    <div class="divider"></div>
+    <p class="section-sub">Fill in the details below, preview the certificate, then send it.</p>
+
+    <!-- Form -->
+    <div id="form-container">
+      <div class="field">
+        <label for="name">Recipient Name <span style="color:#b33">*</span></label>
+        <input type="text" id="name" name="name" maxlength="100" placeholder="e.g. Margaret Gale" autocomplete="off">
+        <div class="field-error" id="name-error" hidden></div>
+      </div>
+
+      <div class="field">
+        <label for="achievement">Achievement</label>
+        <textarea id="achievement" name="achievement" maxlength="200" placeholder="In recognition of extraordinary contributions to the art of peaceful coexistence"></textarea>
+        <div class="hint">Optional — leave blank to use the default citation.</div>
+      </div>
+
+      <div class="field">
+        <label for="email">Recipient Email <span style="color:#b33">*</span></label>
+        <input type="email" id="email" name="email" placeholder="recipient@example.com" autocomplete="off">
+        <div class="field-error" id="email-error" hidden></div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-preview" id="preview-btn" type="button">Preview</button>
+        <button class="btn btn-award" id="award-btn" type="button">Award the Prize</button>
+      </div>
+
+      <!-- Preview area (hidden until used) -->
+      <div class="preview-area" id="preview-area" hidden></div>
+    </div>
+
+    <!-- Confirmation (hidden until submitted) -->
+    <div class="confirmation" id="confirmation" hidden>
+      <div class="trophy">🏆</div>
+      <h2>The Prize Has Been Awarded!</h2>
+      <p id="confirmation-text"></p>
+      <button class="reset-btn" id="reset-btn" type="button">Award Another</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; <span id="year"></span> Big Beautiful Peace Prize &nbsp;&mdash;&nbsp; Awarded with great ceremony
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const nameEl        = document.getElementById('name');
+    const achievementEl = document.getElementById('achievement');
+    const emailEl       = document.getElementById('email');
+    const nameErr       = document.getElementById('name-error');
+    const emailErr      = document.getElementById('email-error');
+    const previewBtn    = document.getElementById('preview-btn');
+    const awardBtn      = document.getElementById('award-btn');
+    const previewArea   = document.getElementById('preview-area');
+    const formContainer = document.getElementById('form-container');
+    const confirmation  = document.getElementById('confirmation');
+    const confirmText   = document.getElementById('confirmation-text');
+    const resetBtn      = document.getElementById('reset-btn');
+
+    function clearErrors() {
+      nameErr.hidden  = true;
+      emailErr.hidden = true;
+      nameEl.style.borderColor  = '';
+      emailEl.style.borderColor = '';
+    }
+
+    function validateName() {
+      const v = nameEl.value.trim();
+      if (!v) { showError(nameErr, nameEl, 'Name is required.'); return false; }
+      if (v.length > 100) { showError(nameErr, nameEl, 'Name must be 100 characters or fewer.'); return false; }
+      return true;
+    }
+
+    function validateEmail() {
+      const v = emailEl.value.trim();
+      if (!v) { showError(emailErr, emailEl, 'Email is required.'); return false; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { showError(emailErr, emailEl, 'Please enter a valid email address.'); return false; }
+      return true;
+    }
+
+    function showError(el, input, msg) {
+      el.textContent = msg;
+      el.hidden = false;
+      input.style.borderColor = '#b33';
+    }
+
+    function buildQuery() {
+      const params = new URLSearchParams({ name: nameEl.value.trim() });
+      const ach = achievementEl.value.trim();
+      if (ach) params.set('achievement', ach);
+      return params.toString();
+    }
+
+    // Preview
+    previewBtn.addEventListener('click', async () => {
+      clearErrors();
+      if (!validateName()) return;
+
+      previewBtn.disabled = true;
+      previewArea.hidden  = false;
+      previewArea.innerHTML = '<div class="preview-spinner">Rendering certificate&hellip;</div>';
+
+      try {
+        const url = '/parchment/render?' + buildQuery();
+        const res = await fetch(url);
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || 'Render failed.');
+        }
+        const blob = await res.blob();
+        const src  = URL.createObjectURL(blob);
+        previewArea.innerHTML =
+          '<div class="preview-label">Certificate Preview</div>' +
+          '<img src="' + src + '" alt="Certificate preview">';
+      } catch (err) {
+        previewArea.innerHTML =
+          '<div class="preview-error">Preview unavailable — ' + (err.message || 'please try again.') +
+          '<br>You can still award the prize.</div>';
+      } finally {
+        previewBtn.disabled = false;
+      }
+    });
+
+    // Award
+    awardBtn.addEventListener('click', async () => {
+      clearErrors();
+      const nameOk  = validateName();
+      const emailOk = validateEmail();
+      if (!nameOk || !emailOk) return;
+
+      awardBtn.disabled   = true;
+      awardBtn.textContent = 'Awarding\u2026';
+
+      const body = new URLSearchParams({
+        name:  nameEl.value.trim(),
+        email: emailEl.value.trim(),
+      });
+      const ach = achievementEl.value.trim();
+      if (ach) body.set('achievement', ach);
+
+      try {
+        const res = await fetch('/parchment/issue', { method: 'POST', body });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || 'Something went wrong. Please try again.');
+        }
+        const recipientName  = nameEl.value.trim();
+        const recipientEmail = emailEl.value.trim();
+        confirmText.innerHTML =
+          '<strong>' + escHtml(recipientName) + '</strong> will receive their certificate at ' +
+          '<strong>' + escHtml(recipientEmail) + '</strong>.';
+        formContainer.hidden = true;
+        confirmation.hidden  = false;
+      } catch (err) {
+        awardBtn.disabled   = false;
+        awardBtn.textContent = 'Award the Prize';
+        // Show error inline below the email field
+        emailErr.textContent = err.message;
+        emailErr.hidden = false;
+      }
+    });
+
+    // Reset
+    resetBtn.addEventListener('click', () => {
+      nameEl.value        = '';
+      achievementEl.value = '';
+      emailEl.value       = '';
+      clearErrors();
+      previewArea.hidden  = true;
+      previewArea.innerHTML = '';
+      awardBtn.disabled   = false;
+      awardBtn.textContent = 'Award the Prize';
+      formContainer.hidden = false;
+      confirmation.hidden  = true;
+    });
+
+    function escHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+  </script>
+</body>
+</html>

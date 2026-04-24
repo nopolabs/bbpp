@@ -337,6 +337,7 @@
       .btn { flex: none; width: 100%; }
     }
   </style>
+  <script src="https://challenges.cloudflare.com/turnstile/v1/api.js" async defer></script>
 </head>
 <body>
 
@@ -378,7 +379,8 @@
 
       <div class="form-actions">
         <button class="btn btn-preview" id="preview-btn" type="button">Preview</button>
-        <button class="btn btn-award" id="award-btn" type="button">Award the Prize</button>
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAADCnY8bWziMBe6XP" data-theme="light" data-callback="onTurnstileSuccess" style="align-self:center"></div>
+        <button class="btn btn-award" id="award-btn" type="button" disabled>Award the Prize</button>
       </div>
 
       <!-- Preview area (hidden until used) -->
@@ -495,6 +497,7 @@
       });
       const ach = achievementEl.value.trim();
       if (ach) body.set('achievement', ach);
+      body.set('cf-turnstile-response', turnstile.getResponse());
 
       try {
         const res = await fetch('/parchment/issue', { method: 'POST', body });
@@ -526,8 +529,9 @@
       clearErrors();
       previewArea.hidden  = true;
       previewArea.innerHTML = '';
-      awardBtn.disabled   = false;
+      awardBtn.disabled   = true;
       awardBtn.textContent = 'Award the Prize';
+      turnstile.reset();
       formContainer.hidden = false;
       confirmation.hidden  = true;
     });
@@ -535,6 +539,11 @@
     function escHtml(str) {
       return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
+
+    function onTurnstileSuccess() {
+      awardBtn.disabled = false;
+    }
+    window.onTurnstileSuccess = onTurnstileSuccess;
   </script>
 </body>
 </html>
